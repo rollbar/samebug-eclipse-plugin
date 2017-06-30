@@ -1,0 +1,12 @@
+.project
+.settings
+.idea
+*.iml
+out
+gen
+/bin
+/target
+/build
+
+hs_err_pid*
+*.class
