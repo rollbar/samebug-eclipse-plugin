@@ -60,8 +60,8 @@
    </extension>
    <extension point="org.eclipse.debug.ui.consoleLineTrackers">
    	<consoleLineTracker 
-     id="samebug.plugin.test.handlers.ConsoleLineTracker"
-     class="samebug.plugin.test.handlers.ConsoleLineTracker"
+     id="com.samebug.clients.eclipse.ConsoleLineTracker"
+     class="com.samebug.clients.eclipse.ConsoleLineTracker"
      processType="java">
   </consoleLineTracker>
    </extension>

@@ -1,4 +1,4 @@
-package samebug.plugin.test.handlers;
+package com.samebug.clients.eclipse;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package samebug.plugin.test.handlers;
+package com.samebug.clients.eclipse;
 
 import java.awt.Desktop;
 import java.io.IOException;
