@@ -8,8 +8,6 @@ import org.eclipse.core.commands.ExecutionException;
 //import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.browser.Browser;
-import org.eclipse.swt.browser.TitleEvent;
-import org.eclipse.swt.browser.TitleListener;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PartInitException;
@@ -22,14 +20,6 @@ import org.eclipse.ui.handlers.HandlerUtil;
  * @see org.eclipse.core.commands.AbstractHandler
  */
 public class SampleHandler extends AbstractHandler {
-	final private String extractApiKeyFunctionJs = "function extractApiKey() {\n" + 
-			"var request = new XMLHttpRequest();\n" + 
-			"request.open('GET', '/rest/auth/api-key', false);\n" + 
-			"request.setRequestHeader('Accept-Language', 'en-US,en;q=0.8');\n" +
-			"request.send(null);\n" + 
-			"return request.responseText;"
-			+ "}";
-
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 				
@@ -47,12 +37,6 @@ public class SampleHandler extends AbstractHandler {
 		browser.getParent();
 		browser.setBounds(0, 0, 600, 400);
 		browser.setUrl("https://nightly.samebug.com/login");
-		browser.addTitleListener(new TitleListener() {
-			public void changed(TitleEvent event) {
-				browser.execute(extractApiKeyFunctionJs);
-			}
-		});
-
 		return null;
 	}
 }
