@@ -10,6 +10,10 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.browser.Browser;
 import org.eclipse.swt.browser.TitleEvent;
 import org.eclipse.swt.browser.TitleListener;
+import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.IWorkbenchWindow;
+import org.eclipse.ui.PartInitException;
+import org.eclipse.ui.handlers.HandlerUtil;
 
 /**
  * Our sample handler extends AbstractHandler, an IHandler base class.
@@ -21,10 +25,16 @@ public class SampleHandler extends AbstractHandler {
 
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
-
-		//IWorkbenchWindow window = HandlerUtil.getActiveWorkbenchWindowChecked(event);
+				
+		IWorkbenchWindow window = HandlerUtil.getActiveWorkbenchWindowChecked(event);
+		IWorkbenchPage page = window.getActivePage();
+		try {
+			page.showView("com.samebug.clients.eclipse.views.MyView");
+		} catch (PartInitException e) {
+			e.printStackTrace();
+		}
 		
-		Browser browser = new Browser(MyEditor.getParent(), SWT.NONE);
+		Browser browser = new Browser(MyView.getParent(), SWT.NONE);
 		browser.getParent();
 		browser.addTitleListener(new TitleListener() {
 			public void changed(TitleEvent event) {
@@ -32,15 +42,7 @@ public class SampleHandler extends AbstractHandler {
 			}
 		});
 		browser.setBounds(0, 0, 600, 400);
-		//shell.pack();
-		//shell.open();
 		browser.setUrl("http://samebug.io");
-
-		/*while (!shell.isDisposed()) {
-			if (!display.readAndDispatch()) {
-				display.sleep();
-			}
-		}*/
 
 		return null;
 	}

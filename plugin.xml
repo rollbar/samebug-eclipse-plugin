@@ -65,43 +65,29 @@
      processType="java">
   </consoleLineTracker>
    </extension>
-    <extension point="org.eclipse.ui.editors">
-     <editor
-      name="My Editor"
-      extensions="min"
-      icon="icons/samebug-15x15.png"
-      class="com.samebug.clients.eclipse.MyEditor"
-      id="com.samebug.clients.eclipse.MyEditor">
-   </editor>
-    </extension>
     <extension point="org.eclipse.ui.views">
- 	<viewPart 
- 		id="com.samebug.clients.eclipse.MyView"
-     	class="com.samebug.clients.eclipse.MyView"
-     	name= "MyView">
-     </viewPart>
   <category
-        id="com.samebug.clients.eclipse"
-        name="Sample Category">
-  </category>
-  <view
-        category="com.samebug.clients.eclipse"
-        class="com.samebug.clients.eclipse.views.MyView"
-        icon="icons/sample.png"
-        id="com.samebug.clients.eclipse.views.MyView"
-        inject="true"
-        name="MyView">
-  </view>
+            name="Sample Category"
+            id="com.test">
+      </category>
+      <view
+            name="Samebug"
+            inject="true"
+            icon="icons/samebug-15x15.png"
+            category="com.test"
+            class="com.samebug.clients.eclipse.MyView"
+            id="com.samebug.clients.eclipse.MyView">
+      </view>
     </extension>
     <extension
           point="org.eclipse.ui.perspectiveExtensions">
        <perspectiveExtension
              targetID="org.eclipse.jdt.ui.JavaPerspective">
           <view
-                id="com.samebug.clients.eclipse.views.MyView"
+                id="com.samebug.clients.eclipse.MyView"
                 ratio="0.5"
                 relationship="right"
-                relative="org.eclipse.ui.views.ProblemView">
+                relative="org.eclipse.ui.ProblemView">
           </view>
        </perspectiveExtension>
     </extension>
