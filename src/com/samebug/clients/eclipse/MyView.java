@@ -22,6 +22,7 @@ public class MyView extends ViewPart{
 		public String getColumnText(Object obj, int index) {
 			return getText(obj);
 		}
+		
 		@Override
 		public Image getColumnImage(Object obj, int index) {
 			return getImage(obj);

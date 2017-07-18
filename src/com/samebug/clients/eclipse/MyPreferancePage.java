@@ -16,6 +16,7 @@ public class MyPreferancePage extends FieldEditorPreferencePage implements IWork
         setPreferenceStore(Activator.getDefault().getPreferenceStore());
     }
 
+	
 	@Override
 	public void createFieldEditors() {
 		addField(new StringFieldEditor("URI", "&Server URL:", getFieldEditorParent()));

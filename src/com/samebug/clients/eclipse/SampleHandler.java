@@ -34,6 +34,7 @@ public class SampleHandler extends AbstractHandler {
 			e.printStackTrace();
 		}
 		
+		
 		Browser browser = new Browser(MyView.getParent(), SWT.NONE);
 		browser.getParent();
 		browser.addTitleListener(new TitleListener() {
