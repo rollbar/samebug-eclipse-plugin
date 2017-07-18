@@ -12,7 +12,7 @@ import org.eclipse.ui.part.ViewPart;
 
 public class MyView extends ViewPart{
 	
-	public static final String ID = "com.samebug.clients.eclipse.views.MyView";
+	public static final String ID = "com.samebug.clients.eclipse.MyView";
 	private static Composite parent;
 	
 	@Inject IWorkbench workbench;

@@ -13,12 +13,21 @@
             categoryId="com.samebug.clients.eclipse.commands.category"
             id="com.samebug.clients.eclipse.commands.sampleCommand">
       </command>
+      <command
+            name="show api key"
+            categoryId="com.samebug.clients.eclipse.commands.category"
+            id="com.samebug.clients.eclipse.commands.showApiKey">
+      </command>
    </extension>
    <extension
          point="org.eclipse.ui.handlers">
       <handler
             commandId="com.samebug.clients.eclipse.commands.sampleCommand"
             class="com.samebug.clients.eclipse.SampleHandler">
+      </handler>
+      <handler
+            commandId="com.samebug.clients.eclipse.commands.showApiKey"
+            class="com.samebug.clients.eclipse.ShowApiKey">
       </handler>
    </extension>
    <extension
@@ -42,6 +51,10 @@
                   commandId="com.samebug.clients.eclipse.commands.sampleCommand"
                   mnemonic="S"
                   id="com.samebug.clients.eclipse.menus.sampleCommand">
+            </command>
+            <command
+                  commandId="com.samebug.clients.eclipse.commands.showApiKey"
+                  id="com.samebug.clients.eclipse.menus.showApiKey">
             </command>
          </menu>
       </menuContribution>

@@ -1,10 +1,12 @@
 package com.samebug.clients.eclipse;
 
+import org.eclipse.swt.browser.Browser;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
 public class Activator extends AbstractUIPlugin {
 	private static Activator plugin;
+	public static Browser browser;
 
 	public Activator() {
 	}

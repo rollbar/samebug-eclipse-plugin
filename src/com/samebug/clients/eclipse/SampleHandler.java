@@ -22,6 +22,13 @@ import org.eclipse.ui.handlers.HandlerUtil;
  * @see org.eclipse.core.commands.AbstractHandler
  */
 public class SampleHandler extends AbstractHandler {
+	final private String extractApiKeyFunctionJs = "function extractApiKey() {\n" + 
+			"var request = new XMLHttpRequest();\n" + 
+			"request.open('GET', '/rest/auth/api-key', false);\n" + 
+			"request.setRequestHeader('Accept-Language', 'en-US,en;q=0.8');\n" +
+			"request.send(null);\n" + 
+			"return request.responseText;"
+			+ "}";
 
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
@@ -29,21 +36,22 @@ public class SampleHandler extends AbstractHandler {
 		IWorkbenchWindow window = HandlerUtil.getActiveWorkbenchWindowChecked(event);
 		IWorkbenchPage page = window.getActivePage();
 		try {
-			page.showView("com.samebug.clients.eclipse.views.MyView");
+			page.showView("com.samebug.clients.eclipse.MyView");
 		} catch (PartInitException e) {
 			e.printStackTrace();
 		}
 		
 		
-		Browser browser = new Browser(MyView.getParent(), SWT.NONE);
+		Activator.browser = new Browser(MyView.getParent(), SWT.NONE);
+		final Browser browser = Activator.browser;
 		browser.getParent();
+		browser.setBounds(0, 0, 600, 400);
+		browser.setUrl("https://nightly.samebug.com/login");
 		browser.addTitleListener(new TitleListener() {
 			public void changed(TitleEvent event) {
-				//shell.setText(event.title);
+				browser.execute(extractApiKeyFunctionJs);
 			}
 		});
-		browser.setBounds(0, 0, 600, 400);
-		browser.setUrl("http://samebug.io");
 
 		return null;
 	}
