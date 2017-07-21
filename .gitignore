@@ -10,3 +10,5 @@ gen
 
 hs_err_pid*
 *.class
+/bin/
+.DS_Store
