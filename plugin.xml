@@ -29,6 +29,10 @@
             commandId="com.samebug.clients.eclipse.commands.showApiKey"
             class="com.samebug.clients.eclipse.ShowApiKey">
       </handler>
+       <handler
+            commandId="com.samebug.clients.eclipse.commands.popupTest"
+            class="com.samebug.clients.eclipse.PopupHandler">
+      </handler>
    </extension>
    <extension
          point="org.eclipse.ui.bindings">
@@ -56,19 +60,19 @@
                   commandId="com.samebug.clients.eclipse.commands.showApiKey"
                   id="com.samebug.clients.eclipse.menus.showApiKey">
             </command>
+             <command
+                  commandId="com.samebug.clients.eclipse.commands.popupTest"
+                  name="p">
+            </command>
          </menu>
       </menuContribution>
       <menuContribution
-            locationURI="toolbar:org.eclipse.ui.main.toolbar?after=additions">
-         <toolbar
-               id="com.samebug.clients.eclipse.toolbars.sampleToolbar">
-            <command
-                  commandId="com.samebug.clients.eclipse.commands.sampleCommand"
-                  icon="icons/samebug-15x15.png"
-                  tooltip="Say hello world"
-                  id="com.samebug.clients.eclipse.toolbars.sampleCommand">
-            </command>
-         </toolbar>
+            locationURI="popup:org.eclipse.ui.popup.any?after=additions">
+         <command
+               commandId="com.samebug.clients.eclipse.commands.popupTest"
+               label="test33"
+               style="push">
+         </command>
       </menuContribution>
    </extension>
    <extension point="org.eclipse.debug.ui.consoleLineTrackers">
