@@ -17,15 +17,20 @@
             categoryId="com.samebug.clients.eclipse.commands.category"
             id="com.samebug.clients.eclipse.commands.showApiKey">
       </command>
+      <command
+            name="Samebug"
+            categoryId="com.samebug.clients.eclipse.commands.category"
+            id="com.samebug.clients.eclipse.commands.popupTest">
+      </command>
    </extension>
    <extension point="org.eclipse.ui.handlers">
       <handler
             commandId="com.samebug.clients.eclipse.commands.sampleCommand"
-            class="com.samebug.clients.eclipse.SampleHandler">
+            class="com.samebug.clients.eclipse.handlers.SampleHandler">
       </handler>
        <handler
             commandId="com.samebug.clients.eclipse.commands.popupTest"
-            class="com.samebug.clients.eclipse.PopupHandler">
+            class="com.samebug.clients.eclipse.handlers.PopupHandler">
       </handler>
       <handler
             commandId="com.samebug.clients.eclipse.commands.showApiKey"
@@ -63,7 +68,7 @@
       		</command>
       		  <command
                   commandId="com.samebug.clients.eclipse.commands.popupTest"
-                  name="p">
+                  id="com.samebug.clients.eclipse.commands.popupTest">
             </command>
          </menu>
       </menuContribution>
@@ -136,8 +141,8 @@
        </contexts>
     </extension>
     <extension point="org.eclipse.ui.preferencePages">
-    			<page id="com.samebug.clients.eclipse.handlers.MyPreferencePage"
-	    		class="com.samebug.clients.eclipse.handlers.MyPreferencePage"
+    			<page id="com.samebug.clients.eclipse.handlers.PreferencePage"
+	    		class="com.samebug.clients.eclipse.handlers.PreferencePage"
 	    		category="org.eclipse.ui.preferencePages.Workbench"
             name="Samebug Configuration">
        </page>

@@ -10,9 +10,9 @@ import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.part.ViewPart;
 
-public class MyView extends ViewPart{
+public class BrowserView extends ViewPart{
 	
-	public static final String ID = "com.samebug.clients.eclipse.views.MyView";
+	public static final String ID = "com.samebug.clients.eclipse.views.BrowserView";
 	private static Composite parent;
 	
 	@Inject IWorkbench workbench;
@@ -34,7 +34,7 @@ public class MyView extends ViewPart{
 	
 	@Override
 	public void createPartControl(Composite parent) {
-		MyView.parent=parent;
+		BrowserView.parent=parent;
 	}
 	
 	public static Composite getParent() {
