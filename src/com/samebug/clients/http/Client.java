@@ -19,7 +19,6 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicHeader;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.samebug.clients.http.entities.jsonapi.CreatedSearchResource;
 import com.samebug.clients.http.json.Json;
 
@@ -27,21 +26,20 @@ public class Client {
 	
 	final HttpClient httpClient;
     static final int MaxConnections = 20;
+    private static String APIKey;
     
     final static URI server=URI.create("https://nightly.samebug.com/rest/");
     final static URI search=server.resolve("searches");
     
     final static Gson gson= Json.gson;
-
+    private Integer searchID;
 	
-	public Client(String APIKey) {
+	public Client() {
 		 HttpClientBuilder httpBuilder = HttpClientBuilder.create();
 		 
 		 List<BasicHeader> defaultHeaders = new ArrayList<BasicHeader>();
 	     defaultHeaders.add(new BasicHeader("User-Agent", "Samebug Eclipse Plugin"));
-	     defaultHeaders.add(new BasicHeader("X-Samebug-ApiKey", APIKey));
 
-	     
 	     httpClient = httpBuilder.setDefaultRequestConfig(RequestConfig.DEFAULT).setMaxConnTotal(MaxConnections).setMaxConnPerRoute(MaxConnections)
 	    		 .setDefaultHeaders(defaultHeaders).build();
 	}
@@ -50,13 +48,15 @@ public class Client {
 		NewSearch newSearch= new NewSearch(stacktrace);
 		HttpPost request = new HttpPost(search);
 		request.setHeader("Content-Type", "application/json");
+		request.setHeader("X-Samebug-ApiKey", APIKey);
 		request.setEntity(new StringEntity(gson.toJson(newSearch), Consts.UTF_8));
+		
 		try {
 			final HttpResponse httpResponse = httpClient.execute(request);
 			InputStream content = httpResponse.getEntity().getContent();
             Reader reader = new InputStreamReader(content, "UTF-8");
-            CreatedSearchResource csr=gson.fromJson(reader, CreatedSearchResource.class);
-			System.out.println(csr);
+            CreatedSearchResource createdSearchResource=gson.fromJson(reader, CreatedSearchResource.class);
+            searchID=createdSearchResource.getData().getId();
 		} catch (ClientProtocolException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -64,6 +64,14 @@ public class Client {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public void setKey(String apiKey) {
+		APIKey=apiKey;
+	}
+	
+	public Integer getSearchID() {
+		return this.searchID;
 	}
 	
 }
