@@ -3,6 +3,7 @@ package com.samebug.clients.eclipse.search;
 import java.util.List;
 
 import javax.swing.*;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -29,6 +30,7 @@ public final class StackTraceMatcher extends MatcherStateMachine implements LogS
     
     @Override
     public void append(String text) {
+    		System.out.println(text);
         timer.stop();
         String[] lines = text.split("\\r\\n|\\r|\\n", -1);
         if (lines.length == 1) {

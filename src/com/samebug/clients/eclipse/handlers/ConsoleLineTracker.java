@@ -1,10 +1,10 @@
 package com.samebug.clients.eclipse.handlers;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import com.samebug.clients.eclipse.search.*;
-import com.samebug.clients.http.Client;
 
 import org.eclipse.debug.ui.console.IConsole;
 import org.eclipse.debug.ui.console.IConsoleLineTrackerExtension;
@@ -18,9 +18,12 @@ public class ConsoleLineTracker implements IConsoleLineTrackerExtension{
 	private static IConsole console;
 	private static List<IRegion> lines= new ArrayList<IRegion>(); 
 	
+	public List<Integer> IDs=new ArrayList<Integer>();
+	public List<String> stacktraces=new ArrayList<String>();
+	
 	private StackTraceMatcher stackTraceMatcher;
 	
-	private static boolean consoleClosed= true;
+	private static boolean consoleClosed = true;
 
 	/**
 	 * @see org.eclipse.debug.ui.console.IConsoleLineTracker#dispose()
@@ -36,13 +39,18 @@ public class ConsoleLineTracker implements IConsoleLineTrackerExtension{
 	        ConsoleLineTracker.console= c;
 	        lines= new ArrayList<IRegion>();
 	        consoleClosed= false;
+	        
+	        Activator.getDefault().registerConsoleTracker(this);
 	        stackTraceMatcher=new StackTraceMatcher(new StackTraceListener(){
 
 				@Override
 				public void stacktraceFound(String stacktrace) {
 					if(SampleHandler.getKey()!=null) {
-						Client client = new Client(SampleHandler.getKey());
-						client.sendStacktrace(stacktrace);
+						Activator.getDefault().client.setKey(SampleHandler.getKey());
+						Activator.getDefault().client.sendStacktrace(stacktrace);
+						IDs.add(Activator.getDefault().client.getSearchID());
+						stacktraces.add(stacktrace);
+						System.out.println(Activator.getDefault().client.getSearchID());
 					}
 				}
 			});
@@ -54,31 +62,23 @@ public class ConsoleLineTracker implements IConsoleLineTrackerExtension{
 	 */
 	public void lineAppended(IRegion line) {
 		lines.add(line);
-		stackTraceMatcher.append(console.getDocument().get());
-	}
-		
-	public void addHyperlink(IRegion line) {
-		int offset=line.getOffset();
-		int length=line.getLength();
-		String exceptionName = null;
 		try {
-			exceptionName = console.getDocument().get(offset,length);
+			stackTraceMatcher.append(console.getDocument().get(line.getOffset(), line.getLength()));
 		} catch (BadLocationException e) {
 			e.printStackTrace();
 		}
-		IHyperlink link = new JavaStacktraceHyperlink(exceptionName);
-		console.addLink(link, offset, length);
+		recognizeWord("Exception");
 	}
-	
+		
 	public void recognizeWord(String word) {
 		String searchfor=console.getDocument().get();
 		if(searchfor.contains(word)) {
-			int startindex=searchfor.indexOf(word);
+			int startindex=searchfor.indexOf(word);	
 			IHyperlink link = new JavaStacktraceHyperlink(word);
 			console.addLink(link, startindex, word.length());
 		}
 	}
-	
+		
 	public static int getNumberOfMessages() {
 		return lines.size();
 	}

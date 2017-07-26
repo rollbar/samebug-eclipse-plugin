@@ -3,7 +3,6 @@ package com.samebug.clients.eclipse.handlers;
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
-import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.SWTException;
 import org.eclipse.swt.browser.Browser;
@@ -14,7 +13,7 @@ import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.handlers.HandlerUtil;
 
-import com.samebug.clients.eclipse.views.MyView;
+import com.samebug.clients.eclipse.views.BrowserView;
 
 /**
  * Our sample handler extends AbstractHandler, an IHandler base class.
@@ -45,27 +44,22 @@ public class SampleHandler extends AbstractHandler {
 		IWorkbenchWindow window = HandlerUtil.getActiveWorkbenchWindowChecked(event);
 		IWorkbenchPage page = window.getActivePage();
 		try {
-			page.showView("com.samebug.clients.eclipse.views.MyView");
+			page.showView("com.samebug.clients.eclipse.views.BrowserView");
 		} catch (PartInitException e) {
 			e.printStackTrace();
 		}
 		
-		Activator.browser = new Browser(MyView.getParent(), SWT.NONE);
-		final Browser browser = Activator.browser;
-		browser.getParent();
-		browser.setBounds(0, 0, 600, 400);
-		browser.setUrl("https://nightly.samebug.com/login");
+		Activator.getDefault().browser = new Browser(BrowserView.getParent(), SWT.NONE);
+		Activator.getDefault().browser.setUrl("https://nightly.samebug.com/login");
 		
-		Activator.browser.addTitleListener(new TitleListener() {
+		Activator.getDefault().browser.addTitleListener(new TitleListener() {
 			@Override
 			public void changed(TitleEvent arg0) {
 				try {
-					Object r = Activator.browser.evaluate(extractApiKeyJs);
+					Object r = Activator.getDefault().browser.evaluate(extractApiKeyJs);
 					String apiKey = (String) r;
 					SampleHandler.APIkey=apiKey;
-					System.out.println("Successfully extracted API key: " + apiKey);
-					IPreferenceStore store = Activator.getDefault().getPreferenceStore();
-					store.setValue("API", SampleHandler.getKey());
+					System.out.println("Successfully extracted API key: " + apiKey);						
 				} catch (SWTException x) {
 					System.err.println("Extracting API key failed");;
 				}

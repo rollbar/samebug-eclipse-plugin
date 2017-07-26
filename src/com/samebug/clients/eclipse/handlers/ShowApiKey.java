@@ -26,11 +26,11 @@ public class ShowApiKey extends AbstractHandler {
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		
-			Activator.browser.addTitleListener(new TitleListener() {
+			Activator.getDefault().browser.addTitleListener(new TitleListener() {
 				@Override
 				public void changed(TitleEvent arg0) {
 					try {
-						Object r = Activator.browser.evaluate(extractApiKeyJs);
+						Object r = Activator.getDefault().browser.evaluate(extractApiKeyJs);
 						String apiKey = (String) r;
 						ShowApiKey.APIkey=apiKey;
 						System.out.println("Successfully extracted API key: " + apiKey);
