@@ -25,6 +25,7 @@ public class PreferencePage extends FieldEditorPreferencePage implements IWorkbe
 		addField(new StringFieldEditor("TIMEOUT", "&Connection Timeout", getFieldEditorParent()));
 		
 		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
+		
 		store.setDefault("URI", "https://nightly.samebug.com/login");
 		if(SampleHandler.getKey()!=null) {
 			store.setDefault("API", SampleHandler.getKey());

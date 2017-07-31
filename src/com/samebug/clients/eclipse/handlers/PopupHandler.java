@@ -1,5 +1,8 @@
 package com.samebug.clients.eclipse.handlers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
@@ -16,13 +19,39 @@ public class PopupHandler extends AbstractHandler {
 		IWorkbenchWindow window = HandlerUtil.getActiveWorkbenchWindowChecked(event);
 		IWorkbenchPage page = window.getActivePage();
 		
+		ConsoleLineTracker consoleTracker = Activator.getDefault().consoleTracker;
+		
+		List<Integer> lineIDs=new ArrayList<Integer>();
+		
+		int i=0;
+			
+		for(String line : consoleTracker.stacktraces) {
+			
+			String[] split = line.split("\\r\\n|\\r|\\n", -1);
+						
+			int startindex = consoleTracker.firstLines.get(i);
+			
+			int lastindex = split.length-1;
+			
+			for(int j=0; j<startindex; j++) {
+				lineIDs.add(0);
+			}
+			
+			for(int j=startindex; j<=lastindex; j++) {
+					lineIDs.add(consoleTracker.IDs.get(i));
+			}
+			i++;
+		}
+				
 		if(page.getSelection() instanceof TextSelection) {
+			
 			TextSelection textSelection=(TextSelection) page.getSelection();
-			textSelection.getStartLine();
+			int lineNumber = textSelection.getStartLine();
+			int ID= lineIDs.get(lineNumber);
+			if(ID!=0)
+				Activator.getDefault().browser.setUrl("https://nightly.samebug.com/searches/" + ID);
 		}
 		
-		System.out.println(Activator.getDefault().consoleTracker.IDs);
-		System.out.println(Activator.getDefault().consoleTracker.stacktraces);
 		return null;
 	}
 	

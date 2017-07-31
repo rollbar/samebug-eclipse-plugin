@@ -33,6 +33,7 @@ public class Client {
     
     final static Gson gson= Json.gson;
     private Integer searchID;
+    public int firstLine;
 	
 	public Client() {
 		 HttpClientBuilder httpBuilder = HttpClientBuilder.create();
@@ -56,6 +57,7 @@ public class Client {
 			InputStream content = httpResponse.getEntity().getContent();
             Reader reader = new InputStreamReader(content, "UTF-8");
             CreatedSearchResource createdSearchResource=gson.fromJson(reader, CreatedSearchResource.class);
+            firstLine=createdSearchResource.getMeta().getFirstLine();
             searchID=createdSearchResource.getData().getId();
 		} catch (ClientProtocolException e) {
 			// TODO Auto-generated catch block

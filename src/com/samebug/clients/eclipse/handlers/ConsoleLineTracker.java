@@ -1,17 +1,16 @@
 package com.samebug.clients.eclipse.handlers;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import com.samebug.clients.eclipse.search.*;
+import com.samebug.clients.http.Client;
 
 import org.eclipse.debug.ui.console.IConsole;
 import org.eclipse.debug.ui.console.IConsoleLineTrackerExtension;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IRegion;
-import org.eclipse.ui.console.IHyperlink;
 
 public class ConsoleLineTracker implements IConsoleLineTrackerExtension{
 
@@ -20,6 +19,7 @@ public class ConsoleLineTracker implements IConsoleLineTrackerExtension{
 	
 	public List<Integer> IDs=new ArrayList<Integer>();
 	public List<String> stacktraces=new ArrayList<String>();
+	public List<Integer> firstLines = new ArrayList<Integer>();
 	
 	private StackTraceMatcher stackTraceMatcher;
 	
@@ -46,11 +46,12 @@ public class ConsoleLineTracker implements IConsoleLineTrackerExtension{
 				@Override
 				public void stacktraceFound(String stacktrace) {
 					if(SampleHandler.getKey()!=null) {
-						Activator.getDefault().client.setKey(SampleHandler.getKey());
-						Activator.getDefault().client.sendStacktrace(stacktrace);
-						IDs.add(Activator.getDefault().client.getSearchID());
+						Client client = Activator.getDefault().client;
+						client.setKey(SampleHandler.getKey());
+						client.sendStacktrace(stacktrace);
+						IDs.add(client.getSearchID());
+						firstLines.add(client.firstLine);
 						stacktraces.add(stacktrace);
-						System.out.println(Activator.getDefault().client.getSearchID());
 					}
 				}
 			});
@@ -63,22 +64,12 @@ public class ConsoleLineTracker implements IConsoleLineTrackerExtension{
 	public void lineAppended(IRegion line) {
 		lines.add(line);
 		try {
-			stackTraceMatcher.append(console.getDocument().get(line.getOffset(), line.getLength()));
+			stackTraceMatcher.append(console.getDocument().get(line.getOffset(), line.getLength())+"\n");
 		} catch (BadLocationException e) {
 			e.printStackTrace();
 		}
-		recognizeWord("Exception");
 	}
-		
-	public void recognizeWord(String word) {
-		String searchfor=console.getDocument().get();
-		if(searchfor.contains(word)) {
-			int startindex=searchfor.indexOf(word);	
-			IHyperlink link = new JavaStacktraceHyperlink(word);
-			console.addLink(link, startindex, word.length());
-		}
-	}
-		
+				
 	public static int getNumberOfMessages() {
 		return lines.size();
 	}

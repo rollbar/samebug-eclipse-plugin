@@ -1,5 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<?eclipse version="3.4"?>
 <plugin>
 
    <extension point="org.eclipse.ui.commands">
@@ -12,29 +10,11 @@
             categoryId="com.samebug.clients.eclipse.commands.category"
             id="com.samebug.clients.eclipse.commands.sampleCommand">
       </command>
-      <command
-            name="show api key"
-            categoryId="com.samebug.clients.eclipse.commands.category"
-            id="com.samebug.clients.eclipse.commands.showApiKey">
-      </command>
-      <command
-            name="Samebug"
-            categoryId="com.samebug.clients.eclipse.commands.category"
-            id="com.samebug.clients.eclipse.commands.popupTest">
-      </command>
    </extension>
    <extension point="org.eclipse.ui.handlers">
       <handler
             commandId="com.samebug.clients.eclipse.commands.sampleCommand"
             class="com.samebug.clients.eclipse.handlers.SampleHandler">
-      </handler>
-       <handler
-            commandId="com.samebug.clients.eclipse.commands.popupTest"
-            class="com.samebug.clients.eclipse.handlers.PopupHandler">
-      </handler>
-      <handler
-            commandId="com.samebug.clients.eclipse.commands.showApiKey"
-            class="com.samebug.clients.eclipse.handlers.ShowApiKey">
       </handler>
        <handler
             commandId="com.samebug.clients.eclipse.commands.popupTest"
@@ -61,24 +41,7 @@
                   mnemonic="S"
                   id="com.samebug.clients.eclipse.menus.sampleCommand">
             </command>
-            <command
-   				commandId="com.samebug.clients.eclipse.commands.showApiKey"
-            		mnemonic="S"
-            		id="com.samebug.clients.eclipse.menus.showApiKey">
-      		</command>
-      		  <command
-                  commandId="com.samebug.clients.eclipse.commands.popupTest"
-                  id="com.samebug.clients.eclipse.commands.popupTest">
-            </command>
          </menu>
-      </menuContribution>
-      <menuContribution
-            locationURI="popup:org.eclipse.ui.popup.any?after=additions">
-         <command
-               commandId="com.samebug.clients.eclipse.commands.popupTest"
-               label="test33"
-               style="push">
-         </command>
       </menuContribution>
       <menuContribution
             locationURI="toolbar:org.eclipse.ui.main.toolbar?after=additions">
@@ -96,7 +59,8 @@
             locationURI="popup:org.eclipse.ui.popup.any?after=additions">
          <command
                commandId="com.samebug.clients.eclipse.commands.popupTest"
-               label="test33"
+               label="Search"
+               icon="icons/samebug-15x15.png"
                style="push">
          </command>
         </menuContribution>

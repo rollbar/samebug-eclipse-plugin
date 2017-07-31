@@ -30,7 +30,6 @@ public final class StackTraceMatcher extends MatcherStateMachine implements LogS
     
     @Override
     public void append(String text) {
-    		System.out.println(text);
         timer.stop();
         String[] lines = text.split("\\r\\n|\\r|\\n", -1);
         if (lines.length == 1) {
