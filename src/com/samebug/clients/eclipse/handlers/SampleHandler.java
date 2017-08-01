@@ -7,6 +7,10 @@ import java.net.URI;
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.ICoreRunnable;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.SWTException;
@@ -16,6 +20,7 @@ import org.eclipse.swt.browser.TitleEvent;
 import org.eclipse.swt.browser.TitleListener;
 import org.eclipse.swt.browser.WindowEvent;
 import org.eclipse.swt.graphics.Rectangle;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PartInitException;
@@ -69,7 +74,7 @@ public class SampleHandler extends AbstractHandler {
 		
 		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
 		String loggedIn="";
-	
+			
 		if(!store.getString("API").isEmpty()) {
 			loggedIn = "return (function () {\n"+
 					"var interval = setInterval(function() {\n" + 
@@ -88,6 +93,8 @@ public class SampleHandler extends AbstractHandler {
 					"}\n" + 
 					"}, 1000);" +
 					"})()";
+		} else {
+			loggedIn = "";
 		}
 		
 		IWorkbenchWindow window = HandlerUtil.getActiveWorkbenchWindowChecked(event);
