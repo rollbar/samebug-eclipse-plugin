@@ -1,5 +1,9 @@
 package com.samebug.clients.eclipse.handlers;
 
+import java.awt.Desktop;
+import java.io.IOException;
+import java.net.URI;
+
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
@@ -7,8 +11,10 @@ import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.SWTException;
 import org.eclipse.swt.browser.Browser;
+import org.eclipse.swt.browser.OpenWindowListener;
 import org.eclipse.swt.browser.TitleEvent;
 import org.eclipse.swt.browser.TitleListener;
+import org.eclipse.swt.browser.WindowEvent;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
@@ -62,9 +68,13 @@ public class SampleHandler extends AbstractHandler {
 		
 		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
 		String loggedIn="";
-		
+	
 		if(!store.getString("API").isEmpty()) {
 			loggedIn = "return (function () {\n"+
+					"var interval = setInterval(function() {\n" + 
+					"if(document.getElementsByClassName('button-label').length != 0) {\n" + 
+					"alert('klslskl');\n" +
+					"clearInterval(interval);\n" + 
 					"var postData = {\n"+
 					"\"type\": \"signin-api-key-request\",\n" +
 					"\"apiKey\":" + "\"" + store.getString("API") + "\"\n" +
@@ -73,7 +83,9 @@ public class SampleHandler extends AbstractHandler {
 					"request.open('POST', '/rest/auth/signin-api-key', true);\n" + 
 					"request.setRequestHeader('Content-Type', 'application/json');\n" +
 					"request.setRequestHeader('Accept-Language', 'en-US,en;q=0.8');\n" +
-					"request.send(JSON.stringify(postData));\n" +
+					"request.send(JSON.stringify(postData));\n" + 
+					"}\n" + 
+					"}, 1000);" +
 					"})()";
 		}
 		
@@ -89,9 +101,9 @@ public class SampleHandler extends AbstractHandler {
 		Rectangle bounds = BrowserView.getParent().getBounds();
 		
 		Activator.getDefault().browser = new Browser(BrowserView.getParent(), SWT.NONE);
-		Activator.getDefault().browser.setUrl("https://nightly.samebug.com/");
+		Activator.getDefault().browser.setUrl("https://nightly.samebug.com/login");
 		Activator.getDefault().browser.setBounds(bounds);
-		
+				
 		System.out.println(store.getString("API"));
 		if(!loggedIn.isEmpty()) {
 			try {
@@ -100,6 +112,20 @@ public class SampleHandler extends AbstractHandler {
 				e.printStackTrace();
 			}
 		}
+		
+		Activator.getDefault().browser.addOpenWindowListener(new OpenWindowListener() {
+
+			@Override
+			public void open(WindowEvent event) {
+				Desktop desktop = Desktop.getDesktop();
+				URI uri = URI.create(Activator.getDefault().browser.getUrl());
+				try {
+					desktop.browse(uri);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		});
 		
 		Activator.getDefault().browser.addTitleListener(new TitleListener() {
 			
