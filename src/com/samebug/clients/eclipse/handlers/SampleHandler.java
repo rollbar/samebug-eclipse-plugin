@@ -48,6 +48,7 @@ public class SampleHandler extends AbstractHandler {
 	}
 	
 /*
+ * 
 (function () {
             var postData = {
                 "type": "signin-api-key-request",
