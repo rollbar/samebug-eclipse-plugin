@@ -3,6 +3,10 @@ package com.samebug.clients.eclipse.handlers;
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.ICoreRunnable;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.SWTException;
@@ -10,6 +14,7 @@ import org.eclipse.swt.browser.Browser;
 import org.eclipse.swt.browser.TitleEvent;
 import org.eclipse.swt.browser.TitleListener;
 import org.eclipse.swt.graphics.Rectangle;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PartInitException;
@@ -61,7 +66,7 @@ public class SampleHandler extends AbstractHandler {
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		
 		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
-		String loggedIn="";
+		final String loggedIn;
 		
 		if(!store.getString("API").isEmpty()) {
 			loggedIn = "return (function () {\n"+
@@ -75,6 +80,8 @@ public class SampleHandler extends AbstractHandler {
 					"request.setRequestHeader('Accept-Language', 'en-US,en;q=0.8');\n" +
 					"request.send(JSON.stringify(postData));\n" +
 					"})()";
+		} else {
+			loggedIn = "";
 		}
 		
 		IWorkbenchWindow window = HandlerUtil.getActiveWorkbenchWindowChecked(event);
@@ -89,17 +96,32 @@ public class SampleHandler extends AbstractHandler {
 		Rectangle bounds = BrowserView.getParent().getBounds();
 		
 		Activator.getDefault().browser = new Browser(BrowserView.getParent(), SWT.NONE);
-		Activator.getDefault().browser.setUrl("https://nightly.samebug.com/");
+		Activator.getDefault().browser.setUrl("https://nightly.samebug.com/login");
 		Activator.getDefault().browser.setBounds(bounds);
 		
-		System.out.println(store.getString("API"));
-		if(!loggedIn.isEmpty()) {
-			try {
-				Activator.getDefault().browser.evaluate(loggedIn);
-			}catch(Exception e) {
-				e.printStackTrace();
-			}
-		}
+		Job.create("login", new ICoreRunnable() {
+			@Override
+			public void run(IProgressMonitor monitor) throws CoreException {
+				System.out.println(store.getString("API"));
+				try {
+					Thread.sleep(10000);
+				} catch (InterruptedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+	            Display.getDefault().asyncExec(new Runnable() {
+	                public void run() {
+	                	if(!loggedIn.isEmpty()) {
+	    					try {
+	    						Activator.getDefault().browser.evaluate(loggedIn);
+	    					}catch(Exception e) {
+	    						e.printStackTrace();
+	    					}
+	    				}
+	    			}
+	             });
+			};
+		}).schedule();
 		
 		Activator.getDefault().browser.addTitleListener(new TitleListener() {
 			
