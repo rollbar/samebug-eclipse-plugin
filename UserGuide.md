@@ -22,3 +22,5 @@ The current plugin version is compatible with Eclipse Oxygen.
   After running a file, position your cursor in any line of the exception in the stacktrace, right-click and click on search.
   
   ![](search.png)    
+
+  The available solutions for your exception will show up in the default browser of your system.
