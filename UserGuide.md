@@ -2,9 +2,11 @@
 *This guide gives the necessary information on how to use the Samebug plugin for Eclipse*.
 
 ## Getting Started
-Before installing the plugin make sure you sign up for a user account at [Samebug](https://samebug.io/).
+Samebug automatically locates relevant solutions to your software crashes from its expert community and solution database.
+By searching with a stack trace Samebug can provide you a more relevant solution to your software crashes without having to browse through endless forums and developer communities.
 
 ### Prerequisites
+Before installing the plugin make sure you sign up for a user account at [Samebug](https://samebug.io/).
 The current plugin version is compatible with Eclipse Oxygen.
 
 ### Installation 
