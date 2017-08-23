@@ -1,5 +1,5 @@
 # Samebug Eclipse Plugin User Guide 
-*This guide gives the necessary information on how to use the Samebug plugin for Eclipse*.
+*This guide gives the necessary information on how to install and use the Samebug plugin for Eclipse*.
 
 ## Getting Started
 
