@@ -2,6 +2,8 @@
 *This guide gives the necessary information on how to use the Samebug plugin for Eclipse*.
 
 ## Getting Started
+
+### Description
 Samebug automatically locates relevant solutions to your software crashes from its expert community and solution database.
 By searching with a stack trace Samebug can provide you a more relevant solution to your software crashes without having to browse through endless forums and developer communities.
 
