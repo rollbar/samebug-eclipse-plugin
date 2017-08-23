@@ -19,7 +19,7 @@ The current plugin version is compatible with Eclipse Oxygen.
   
   ![](login.png)
   
-  After running a file, position your cursor in any line of the exception in the stacktrace, right-click and click on search.
+  After running a file, position your cursor in any line of the exception in the stack trace, right-click and click on search.
   
   ![](search.png)    
 
