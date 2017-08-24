@@ -12,7 +12,8 @@ Before installing the plugin make sure you sign up for a user account at [Samebu
 The current plugin version is compatible with Eclipse Oxygen.
 
 ### Installation 
-Currently the plugin can be installed from the Eclipse Marketplace. Open the Marketplace wizard in the Eclipse IDE.
+#### Using the Marketplace
+Open the Marketplace wizard in the Eclipse IDE.
 
 ![](marketplace.png)
 
@@ -21,6 +22,23 @@ Search for Samebug in the search field and click on the "Install" button. Follow
 ![](find.png)
 
 When prompted with the "Are you sure you want to install..." message dialog, click on "Install Anyway". After the installation, restart your Eclipse.
+
+#### Using the URL
+Click on "Install new software" under Help.
+
+![](newsoftware.png)
+
+Click on the "Add" button, paste the link [https://nightly.samebug.com/eclipse/update-site/](https://nightly.samebug.com/eclipse/update-site/) and click on "OK".
+
+![](adding.png)
+
+![](location.png)
+
+Select the Samebug Feature and click on "Next".
+
+![](select.png)
+
+After agreeing to the terms of license, click on "Finish". After the installation, restart your Eclipse.
 
 ## Using the Plugin 
   Click on the Samebug icon in the Eclipse toolbar.
