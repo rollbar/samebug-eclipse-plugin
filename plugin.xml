@@ -31,26 +31,12 @@
    </extension>
    <extension point="org.eclipse.ui.menus">
       <menuContribution
-            locationURI="menu:org.eclipse.ui.main.menu?after=additions">
-         <menu
-               label="Sample Menu"
-               mnemonic="M"
-               id="com.samebug.clients.eclipse.menus.sampleMenu">
-            <command
-                  commandId="com.samebug.clients.eclipse.commands.sampleCommand"
-                  mnemonic="S"
-                  id="com.samebug.clients.eclipse.menus.sampleCommand">
-            </command>
-         </menu>
-      </menuContribution>
-      <menuContribution
             locationURI="toolbar:org.eclipse.ui.main.toolbar?after=additions">
          <toolbar
                id="com.samebug.clients.eclipse.toolbars.sampleToolbar">
             <command
                   commandId="com.samebug.clients.eclipse.commands.sampleCommand"
                   icon="icons/samebug-15x15.png"
-                  tooltip="Say hello world"
                   id="com.samebug.clients.eclipse.toolbars.sampleCommand">
             </command>
          </toolbar>
@@ -72,20 +58,6 @@
      processType="java">
   </consoleLineTracker>
    </extension>
-    <extension point="org.eclipse.ui.views">
- 	 <category
-            name="Sample Category"
-            id="com.test">
-      </category>
-      <view
-            name="Samebug"
-            inject="true"
-            icon="icons/samebug-15x15.png"
-            category="com.test"
-            class="com.samebug.clients.eclipse.views.BrowserView"
-            id="com.samebug.clients.eclipse.views.BrowserView">
-      </view>
-    </extension>
     <extension
           point="org.eclipse.ui.perspectiveExtensions">
        <perspectiveExtension

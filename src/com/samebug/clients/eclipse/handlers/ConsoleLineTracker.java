@@ -39,20 +39,17 @@ public class ConsoleLineTracker implements IConsoleLineTrackerExtension{
 	        ConsoleLineTracker.console= c;
 	        lines= new ArrayList<IRegion>();
 	        consoleClosed= false;
-	        
+	         
 	        Activator.getDefault().registerConsoleTracker(this);
 	        stackTraceMatcher=new StackTraceMatcher(new StackTraceListener(){
 
 				@Override
 				public void stacktraceFound(String stacktrace) {
-					if(SampleHandler.getKey()!=null) {
 						Client client = Activator.getDefault().client;
-						client.setKey(SampleHandler.getKey());
 						client.sendStacktrace(stacktrace);
 						IDs.add(client.getSearchID());
 						firstLines.add(client.firstLine);
 						stacktraces.add(stacktrace);
-					}
 				}
 			});
 	    }

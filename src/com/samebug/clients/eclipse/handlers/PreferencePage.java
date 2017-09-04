@@ -26,11 +26,6 @@ public class PreferencePage extends FieldEditorPreferencePage implements IWorkbe
 		
 		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
 		
-		store.setDefault("URI", "https://nightly.samebug.com/login");
-		if(SampleHandler.getKey()!=null) {
-			store.setDefault("API", SampleHandler.getKey());
-		}
-		
+		store.setDefault("URI", "https://nightly.samebug.com/");	
 	}
-
 }

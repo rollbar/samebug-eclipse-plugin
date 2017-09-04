@@ -1,6 +1,8 @@
 package com.samebug.clients.eclipse.handlers;
 
 import org.eclipse.swt.browser.Browser;
+import org.eclipse.ui.IWorkbenchWindow;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
@@ -12,6 +14,7 @@ public class Activator extends AbstractUIPlugin {
 	public Browser browser;
 	public Client client;
 	public ConsoleLineTracker consoleTracker;
+	public IWorkbenchWindow window;
 
 	public Activator() {
 		//
@@ -23,6 +26,7 @@ public class Activator extends AbstractUIPlugin {
 
 	@Override
 	public void start(BundleContext context) throws Exception {
+		window = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
 		client=new Client();
 		super.start(context);	
 		plugin = this;

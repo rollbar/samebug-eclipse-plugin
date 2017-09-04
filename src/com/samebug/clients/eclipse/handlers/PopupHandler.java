@@ -1,5 +1,7 @@
 package com.samebug.clients.eclipse.handlers;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,6 +11,8 @@ import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.jface.text.TextSelection;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
+import org.eclipse.ui.PartInitException;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.handlers.HandlerUtil;
 
 public class PopupHandler extends AbstractHandler {
@@ -48,8 +52,16 @@ public class PopupHandler extends AbstractHandler {
 			TextSelection textSelection=(TextSelection) page.getSelection();
 			int lineNumber = textSelection.getStartLine();
 			int ID= lineIDs.get(lineNumber);
-			if(ID!=0)
-				Activator.getDefault().browser.setUrl("https://nightly.samebug.com/searches/" + ID);
+			
+			if(ID!=0) {
+				try {
+					PlatformUI.getWorkbench().getBrowserSupport().getExternalBrowser().openURL(new URL("https://nightly.samebug.com/searches/" + ID));
+				} catch (PartInitException e) {
+					e.printStackTrace();
+				} catch (MalformedURLException e) {
+					e.printStackTrace();
+				}
+			}
 		}
 		
 		return null;
