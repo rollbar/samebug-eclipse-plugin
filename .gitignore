@@ -2,13 +2,10 @@
 .idea
 *.iml
 *~
-out
-gen
-/bin
-/target
-/build
+/bundles/*/target/
+/features/*/target/
+/releng/*/target/
 
 hs_err_pid*
 *.class
-/bin/
 .DS_Store
