@@ -37,12 +37,11 @@ public class Client {
     static final int MaxConnections = 20;
     private static String APIKey;
     
-    final static URI server=URI.create("https://nightly.samebug.com/rest/");
+    final static URI server=URI.create("https://samebug.io/rest/");
     final static URI search=server.resolve("searches");
     
-    final static URI serverLogin=URI.create("https://nightly.samebug.com/rest/");
-    final static URI signin=serverLogin.resolve("auth/signin");
-    final static URI API=serverLogin.resolve("auth/api-key");
+    final static URI signin=server.resolve("auth/signin");
+    final static URI API=server.resolve("auth/api-key");
     
     final static Gson gson= Json.gson;
     private Integer searchID;
@@ -52,7 +51,7 @@ public class Client {
 		 HttpClientBuilder httpBuilder = HttpClientBuilder.create();
 		 
 		 List<BasicHeader> defaultHeaders = new ArrayList<BasicHeader>();
-	     defaultHeaders.add(new BasicHeader("User-Agent", "Samebug Eclipse Plugin"));
+	     defaultHeaders.add(new BasicHeader("User-Agent", "Samebug-Plugin/0.4.0+eclipse Eclipse"));
 
 	     httpClient = httpBuilder.setDefaultRequestConfig(RequestConfig.DEFAULT).setMaxConnTotal(MaxConnections).setMaxConnPerRoute(MaxConnections)
 	    		 .setDefaultHeaders(defaultHeaders).build();

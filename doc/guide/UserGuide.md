@@ -28,7 +28,7 @@ Click on "Install new software" under Help.
 
 ![](newsoftware.png)
 
-Click on the "Add" button, paste the link [https://nightly.samebug.com/eclipse/update-site/](https://nightly.samebug.com/eclipse/update-site/) and click on "OK".
+Click on the "Add" button, paste the link [https://samebug.io/dl/eclipse/oxygen/](https://samebug.io/dl/eclipse/oxygen/) and click on "OK".
 
 ![](adding.png)
 
@@ -51,6 +51,6 @@ After agreeing to the terms of license, click on "Finish". After the installatio
   
   After running a file, position your cursor in any line of the exception in the stack trace, right-click and click on search.
   
-  ![](search.png)    
+  ![](search.png)
 
   The available solutions for your exception will show up in the default browser of your system.
