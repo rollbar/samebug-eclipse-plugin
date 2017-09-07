@@ -51,7 +51,7 @@ public class Client {
 		 HttpClientBuilder httpBuilder = HttpClientBuilder.create();
 		 
 		 List<BasicHeader> defaultHeaders = new ArrayList<BasicHeader>();
-	     defaultHeaders.add(new BasicHeader("User-Agent", "Samebug-Plugin/0.4.0+eclipse Eclipse"));
+	     defaultHeaders.add(new BasicHeader("User-Agent", "Samebug-Plugin/0.5.0+eclipse Eclipse"));
 
 	     httpClient = httpBuilder.setDefaultRequestConfig(RequestConfig.DEFAULT).setMaxConnTotal(MaxConnections).setMaxConnPerRoute(MaxConnections)
 	    		 .setDefaultHeaders(defaultHeaders).build();
