@@ -55,7 +55,7 @@ public class PopupHandler extends AbstractHandler {
 			
 			if(ID!=0) {
 				try {
-					PlatformUI.getWorkbench().getBrowserSupport().getExternalBrowser().openURL(new URL("https://nightly.samebug.com/searches/" + ID));
+					PlatformUI.getWorkbench().getBrowserSupport().getExternalBrowser().openURL(new URL("https://samebug.io/searches/" + ID));
 				} catch (PartInitException e) {
 					e.printStackTrace();
 				} catch (MalformedURLException e) {
