@@ -2,7 +2,7 @@
 <feature
       id="com.samebug.clients.eclipse.feature"
       label="Feature"
-      version="0.1.0.qualifier"
+      version="0.2.0.qualifier"
       provider-name="SAMEBUG">
 
    <description url="https://samebug.io/product">
