@@ -1,0 +1,23 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.samebug</groupId>
+	<artifactId>clients.eclipse.root</artifactId>
+	<version>0.2.0</version>
+	<packaging>pom</packaging>
+	<parent>
+		<groupId>com.samebug</groupId>
+		<artifactId>clients.eclipse.configuration</artifactId>
+		<version>0.2.0</version>
+		<relativePath>./releng/com.samebug.clients.eclipse.configuration</relativePath>
+	</parent>
+
+	<modules>
+		<module>bundles</module>
+		<module>features</module>
+		<module>releng</module>
+	</modules>
+
+  <scm>
+    <tag>0.2.0</tag>
+  </scm>
+</project>

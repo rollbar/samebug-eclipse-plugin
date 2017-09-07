@@ -1,2 +1,11 @@
-/bin/
-/.DS_Store
+.settings
+.idea
+*.iml
+*~
+/bundles/*/target/
+/features/*/target/
+/releng/*/target/
+
+hs_err_pid*
+*.class
+.DS_Store
