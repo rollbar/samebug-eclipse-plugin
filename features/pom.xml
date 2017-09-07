@@ -1,14 +1,14 @@
 <project>
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.samebug</groupId>
-    <artifactId>com.samebug.clients.eclipse.features</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <artifactId>clients.eclipse.features</artifactId>
+    <version>0.1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <parent>
         <groupId>com.samebug</groupId>
-        <artifactId>com.samebug.clients.eclipse.root</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
+        <artifactId>clients.eclipse.root</artifactId>
+        <version>0.1.0-SNAPSHOT</version>
     </parent>
 
     <modules>
